@@ -7,6 +7,11 @@ export default defineNuxtConfig({
   app: {
     baseURL: '/nuxt-weather/', // 👈 一定要加上你的 repo 名稱（結尾有斜線）
   },
+  runtimeConfig: {
+  public: {
+    weatherApiKey: process.env.WEATHER_API_KEY,
+  },
+},
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true }
 })
