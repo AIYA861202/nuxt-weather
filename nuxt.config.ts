@@ -1,12 +1,12 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   //  ssr: true, // 開啟 SSR 模式
-  css: ['~/assets/styles/main.scss'],
+  css: ['@/assets/styles/main.scss'],
   vite: {
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: '@use "@/assets/styles/variable.scss" as *;'
+          additionalData: '@import "@/assets/styles/variable.scss";'
         }
       }
     },
