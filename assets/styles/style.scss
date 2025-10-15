@@ -1,0 +1,107 @@
+.editor {
+  word-wrap: break-word;
+  word-break: break-word;
+  overflow-wrap: break-word;
+
+  * {
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.875;
+    letter-spacing: 0.1em;
+    color: $gray;
+  }
+
+  p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
+
+  b, strong {
+    font-weight: bolder;
+  }
+
+  i {
+    font-style: italic;
+  }
+
+  h1, .h1 {
+    font-size: 2.5rem;
+  }
+
+  h2, .h2 {
+    font-size: 2rem;
+  }
+
+  h3, .h3 {
+    font-size: 1.75rem;
+  }
+
+  h4, .h4 {
+    font-size: 1.5rem;
+  }
+
+  h5, .h5 {
+    font-size: 1.25rem;
+  }
+
+  h6, .h6 {
+    font-size: 1rem;
+  }
+
+  .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+    margin-bottom: .5rem;
+    font-family: inherit;
+    font-weight: 500;
+    line-height: 1.2;
+    color: inherit;
+  }
+
+  blockquote {
+    background-color: #fff ;
+    border-left: 0.7rem solid #007bff;
+    margin: 1.5em 0.7rem;
+    padding: 0.5em 0.7rem;
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+  }
+
+  a {
+    color: #000;
+
+    &:hover {
+      color: $main;
+    }
+  }
+
+  img {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  iframe {
+    aspect-ratio: 16 / 9;
+    max-width: 100% !important;
+    height: auto;
+  }
+
+  ul:not([class]) {
+    padding-left: 20px;
+
+    li {
+      list-style-position: outside;
+      margin-bottom: 5px;
+      list-style-type: disc;
+    }
+  }
+
+  ol:not([class]) {
+    padding-left: 20px;
+
+    li {
+      list-style-position: outside;
+      margin-bottom: 5px;
+      list-style-type: decimal;
+    }
+  }
+
+}
