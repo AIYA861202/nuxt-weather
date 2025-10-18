@@ -11,9 +11,9 @@ export default defineNuxtConfig({
       },
     },
   },
-  nitro: {
-    preset: "github-pages", // 讓 Nuxt 產出 GitHub Pages 相容的靜態檔案
-  },
+  // nitro: {
+  //   preset: "github-pages", // 讓 Nuxt 產出 GitHub Pages 相容的靜態檔案
+  // },
   app: {
     baseURL: "/", // 👈 一定要加上你的 repo 名稱（結尾有斜線/nuxt-weather/）
   },
