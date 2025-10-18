@@ -18,10 +18,12 @@ export default defineNuxtConfig({
     baseURL: '/', // 👈 一定要加上你的 repo 名稱（結尾有斜線/nuxt-weather/）
   },
   runtimeConfig: {
-  public: {
-    weatherApiKey: process.env.WEATHER_API_KEY,
+    WEATHER_API_KEY: process.env.WEATHER_API_KEY,
+    public: {}
   },
-},
+  modules: [
+    '@pinia/nuxt',
+  ],
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true }
 })
