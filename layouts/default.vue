@@ -1,7 +1,7 @@
 <script setup></script>
 
 <template>
-  <div class="body">
+  <div class="p-8">
     <slot />
   </div>
 </template>
