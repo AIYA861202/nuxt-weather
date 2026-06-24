@@ -57,14 +57,14 @@ function setSEO(info) {
 </script>
 
 <template>
-  <div class="p-8 bg">
+  <div class="p-8 pt-1 bg">
     <slot />
   </div>
 </template>
 
 <style lang="scss" scoped>
 .bg {
-  background: linear-gradient(to bottom, #6ca3f3 0%, #addcf3 70%, #ffffff 100%);
+  background: linear-gradient(to bottom, #6ca3f3 0%, #addcf3 60%, #ffffff 100%);
   height: 100vh;
 }
 </style>
