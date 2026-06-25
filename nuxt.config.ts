@@ -41,11 +41,10 @@ export default defineNuxtConfig({
     defaultLocale: 'zh-TW', // 預設中文
     detectBrowserLanguage: false, // 不自動偵測瀏覽器語系
 
-    baseUrl: process.env.NUXT_PUBLIC_APP_URL,
     defaultDirection: 'ltr',
     routesNameSeparator: '___',
     trailingSlash: false,
-    defaultLocaleRouteNameSuffix: 'default'
+    defaultLocaleRouteNameSuffix: 'default',
   },
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },

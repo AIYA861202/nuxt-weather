@@ -1,7 +1,7 @@
 <script setup>
-import defaultImg from "/public/logo.png";
-const dataStore = useWeatherStore();
-const { webInfo } = storeToRefs(dataStore);
+import logo from "/public/logo.png";
+const store = useWeatherStore();
+const { webInfo } = storeToRefs(store);
 const { locale, t } = useI18n();
 const url = useRequestURL();
 const isoCode = {
@@ -13,7 +13,7 @@ let stopWatcher = null;
 stopWatcher = watch(
   locale,
   async (newVal) => {
-    await Promise.all([dataStore.getWebInfo(newVal)]);
+    await store.getWebInfo(newVal);
   },
   {
     immediate: true,
@@ -47,10 +47,10 @@ function setSEO(info) {
     description: info.seo_description || "",
     ogTitle: info.seo_title || t("Title"),
     ogDescription: info.seo_description || "",
-    ogImage: defaultImg,
+    ogImage: logo,
     ogUrl: url.href,
     twitterTitle: info.seo_title || t("Title"),
-    twitterImage: defaultImg,
+    twitterImage: logo,
     twitterDescription: info.seo_description || "",
   });
 }

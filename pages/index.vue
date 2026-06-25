@@ -1,6 +1,5 @@
 <script setup>
-import logoPlaceholder from "/public/logo.png";
-const { t } = useI18n();
+const { locale } = useI18n();
 const store = useWeatherStore();
 const dataset = "F-C0032-001";
 const selectCity = async (city) => {
@@ -8,27 +7,39 @@ const selectCity = async (city) => {
 
   await store.fetchWeather(dataset, city);
 };
+
+const { webInfo } = storeToRefs(store);
+
+const currCity = computed(() => {
+  const city = store.cities.find(
+    (c) => c.name === store.selectedCity || c.enName === store.selectedCity,
+  );
+  return city ? (locale.value === "zh-TW" ? city.name : city.enName) : "";
+});
 </script>
 
 <template>
   <div class="flex flex-col gap-4">
-    <h1 class="logo text-sky-900 mb-0">
-      <NuxtLink class="inline-block" :to="'/'" :title="$t('Home')">
-        <img :src="logoPlaceholder" alt="" />
-        <span class="sr-only">天氣預報</span></NuxtLink
+    <HomeHeader :webInfo="webInfo" />
+    <select
+      class="form-select shadow-sm"
+      @change="selectCity($event.target.value)"
+    >
+      <option disabled selected value="" class="rounded-md">
+        {{ $t("selectCity") }}
+      </option>
+      <option
+        v-for="c in store.cities"
+        :key="locale === 'zh-TW' ? c.name : c.enName"
+        :value="c.name"
       >
-    </h1>
-
-    <select class="form-select shadow-sm" @change="selectCity($event.target.value)">
-      <option disabled selected value="" class="rounded-md">請選擇縣市</option>
-      <option v-for="c in store.cities" :key="c.name" :value="c.name">
-        {{ c.name }}
+        {{ locale === "zh-TW" ? c.name : c.enName }}
       </option>
     </select>
 
     <div v-if="store.loading" class="flex items-center gap-2 m-auto text-white">
       <loading class="text-8xl" />
-      載入中...
+      {{ $t("loading") }}
     </div>
     <div v-else-if="store.error">{{ store.error }}</div>
 
@@ -38,9 +49,9 @@ const selectCity = async (city) => {
         :key="loc.locationName"
         class="p-4 pt-0 mb-4"
       >
-      <div class="text-xl text-center font-medium mb-4">
-        {{ store.selectedCity }} 天氣預報
-      </div>
+        <div class="text-xl text-center font-medium mb-4">
+          {{ currCity + " " + $t("weatherForecast") }}
+        </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div
             v-for="el in loc.weatherElement"
