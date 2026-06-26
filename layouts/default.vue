@@ -1,5 +1,6 @@
 <script setup>
 import logo from "/public/logo.png";
+import ogImg from "/public/og_IMG.png";
 const store = useWeatherStore();
 const { webInfo } = storeToRefs(store);
 const { locale, t } = useI18n();
@@ -47,17 +48,27 @@ function setSEO(info) {
     description: info.seo_description || "",
     ogTitle: info.seo_title || t("Title"),
     ogDescription: info.seo_description || "",
-    ogImage: logo,
+    ogImage: ogImg,
     ogUrl: url.href,
     twitterTitle: info.seo_title || t("Title"),
-    twitterImage: logo,
+    twitterImage: ogImg,
     twitterDescription: info.seo_description || "",
   });
 }
+// 山坡移動寬幅
+const targetX = ref(0);
+const handleMove = (e) => {
+  const w = window.innerWidth;
+
+  targetX.value = (e.clientX / w - 0.5) * 2;
+
+  console.log("parent:", targetX.value);
+};
 </script>
 
 <template>
-  <div class="p-8 pt-1 bg">
+  <div class="p-8 pt-1 bg" @mousemove="handleMove">
+    <HomeBgHill :mouse-x="targetX" />
     <slot />
   </div>
 </template>
@@ -66,5 +77,7 @@ function setSEO(info) {
 .bg {
   background: linear-gradient(to bottom, #6ca3f3 0%, #addcf3 60%, #ffffff 100%);
   height: 100vh;
+  position: relative;
+  overflow: hidden;
 }
 </style>
