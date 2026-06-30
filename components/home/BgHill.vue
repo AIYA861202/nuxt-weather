@@ -15,7 +15,6 @@ watch(
   () => props.mouseX,
   (v) => {
     targetX.value = v;
-    console.log("mouseX:", v);
   },
   { immediate: true },
 );
@@ -35,7 +34,6 @@ const hillPath = computed(() => {
 });
 
 const animate = () => {
-  console.log("anim tick");
   animatedX.value += (targetX.value - animatedX.value) * 0.08;
   requestAnimationFrame(animate);
 };
@@ -46,7 +44,11 @@ onMounted(() => {
 </script>
 
 <template>
-  <svg class="hill" viewBox="0 0 1000 300" preserveAspectRatio="none">
+  <svg
+    class="absolute bottom-0 left-0 w-full h-[35vh]"
+    viewBox="0 0 1000 300"
+    preserveAspectRatio="none"
+  >
     <path :d="hillPath" fill="url(#hillGradient)" />
     <defs>
       <radialGradient
@@ -57,21 +59,12 @@ onMounted(() => {
         gradientUnits="userSpaceOnUse"
         gradientTransform="translate(500 100) rotate(90) scale(211 1055)"
       >
-        <stop stop-color="#E1EA5F" />
-        <stop offset="0.4" stop-color="#AAC857" />
-        <stop offset="1" stop-color="#3E7F57" />
+        <stop stop-color="#FFBDBD" />
+        <stop offset="0.6" stop-color="#BB94BD" />
+        <stop offset="1" stop-color="#8278B8" />
       </radialGradient>
     </defs>
   </svg>
 </template>
 
-<style scoped lang="scss">
-.hill {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-
-  width: 100%;
-  height: 35vh;
-}
-</style>
+<style scoped lang="scss"></style>

@@ -61,23 +61,24 @@ const handleMove = (e) => {
   const w = window.innerWidth;
 
   targetX.value = (e.clientX / w - 0.5) * 2;
-
-  console.log("parent:", targetX.value);
 };
 </script>
 
 <template>
-  <div class="p-8 pt-1 bg" @mousemove="handleMove">
+  <div
+    class="px-4 pt-1 relative min-h-screen overflow-x-hidden bg"
+    @mousemove="handleMove"
+  >
     <HomeBgHill :mouse-x="targetX" />
-    <slot />
+    <div class="relative z-20">
+      <HomeHeader :webInfo="webInfo" />
+      <slot />
+    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .bg {
   background: linear-gradient(to bottom, #6ca3f3 0%, #addcf3 60%, #ffffff 100%);
-  height: 100vh;
-  position: relative;
-  overflow: hidden;
 }
 </style>

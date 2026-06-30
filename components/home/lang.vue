@@ -23,7 +23,7 @@ const setLang = async (newLocale) => {
 <template>
   <button type="button" :title="$t(`${lang.code}`)" @click="setLang(lang.code)">
     <span
-      class="p-3 text-[#ffffff] hover:text-sky-200 transition-colors duration-200"
+      class="p-3 text-[#ffffff] hover:text-[var(--color-main-dark)] transition-colors duration-300 whitespace-nowrap"
       >{{ $t(`${lang.code}-s`) }}</span
     >
   </button>

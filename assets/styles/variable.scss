@@ -8,6 +8,12 @@ $gray4: #bdbdbd;
 $gray5: #e0e0e0;
 $gray6: #f2f2f2;
 
+:root {
+  --color-main: #3c8eca;
+  --color-main-light: #82cbff;
+  --color-main-dark: #004a80;
+}
+
 @mixin line($line) {
   display: -webkit-box;
   -webkit-box-orient: vertical;
