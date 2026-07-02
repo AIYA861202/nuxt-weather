@@ -1,19 +1,13 @@
 <script setup>
-const { locale } = useI18n();
-const store = useWeatherStore();
-// const dataset = "F-C0032-001";
-// const selectCity = async (city) => {
-//   if (!city) return;
-
-//   await store.fetchWeather(dataset, city);
-// };
+const { locale } = useI18n()
+const store = useWeatherStore()
 
 const currCity = computed(() => {
   const city = store.cities.find(
     (c) => c.name === store.selectedCity || c.enName === store.selectedCity,
-  );
-  return city ? (locale.value === "zh-TW" ? city.name : city.enName) : "";
-});
+  )
+  return city ? (locale.value === "zh-TW" ? city.name : city.enName) : ""
+})
 </script>
 
 <template>
@@ -26,34 +20,23 @@ const currCity = computed(() => {
     <div v-else-if="store.error">{{ store.error }}</div>
 
     <div v-else-if="store.cityData?.length">
+      施工中...
       <div class="p-4 mb-4">
         <div class="text-xl text-center font-medium mb-4">
           {{ currCity + " " + $t("weatherForecast") }}
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div
-            v-for="el in store.cityData[0].weatherElement"
-            :key="el.elementName"
-            class="border p-2 rounded bg-gray-50 shadow-md"
-          >
-            <div class="font-semibold">{{ el.elementName }}</div>
-            <ul class="ul">
-              <li class="li" v-for="t in el.time" :key="t.startTime">
-                <span class="font-mono"
-                  >{{ t.startTime }} ~ {{ t.endTime }}:</span
-                >
-                {{ t.parameter.parameterName }}
-                {{ t.parameter.parameterUnit || "" }}
-              </li>
-            </ul>
-          </div>
+        <div class="flex flex-col items-center justify-center gap-4">
+          <PatternCard
+            :wx="store.cityData[0].weatherElement[0]"
+            :pop="store.cityData[0].weatherElement[1]"
+            :mint="store.cityData[0].weatherElement[2]"
+            :cl="store.cityData[0].weatherElement[3]"
+            :maxt="store.cityData[0].weatherElement[4]"
+          />
         </div>
       </div>
     </div>
   </div>
 </template>
 
-<style lang="scss" scoped>
-.sec {
-}
-</style>
+<style lang="scss" scoped></style>

@@ -337,24 +337,8 @@
   "carousel": "carousel",
   "slide": "slide",
   "selectDateHint": "(Selecting a date will automatically update the article list.)",
-  "album": {
-    "photo": "{title} Photo {num}",
-    "openLightbox": "Open lightbox for {title} Photo {num}",
-    "desc": "This album contains { count } photos. Select an image to view it in an enlarged display."
-  },
-   "mailRule": {
-    "p1": "Thank you for using the Section Chief’s Mailbox. To protect your rights and ensure the efficient use of administrative resources, please read the following instructions carefully. By proceeding with your message, you acknowledge and agree to these terms:",
-    "p2": "1. Verification of Identity: You must provide your legal name and contact information (phone number or email address). This information serves as the basis for processing your case.",
-    "p3": "2. Accuracy of Information: Please ensure all provided data is accurate. The Center reserves the right to refuse any cases involving false or misleading information.",
-    "p4": "3. Content Guidelines: Please keep your suggestions concise and clear, and limit them to actual incidents. This system will not accept messages involving irrational emotional outbursts, verbal abuse, or malicious reports.",
-    "p5": "4. Processing Procedure: Upon receiving your message, a designated staff member will review and assign it to the relevant department for handling."
-  },
-  "eventTitle":"Event Name：",
-  "eventCategory": "Category：",
-  "eventTime": "Time：",
-  "eventLocal": "Location：",
-  "eventDetail": "Detail",
-  "eventTicketLink": "Buy Ticket",
-  "eventVideo": "Highlights"
-
+  "Wx":"Weather",
+  "Pop":"Chance of Rain",
+  "TR":"Temperature Range",
+  "Cl":"Comfort Level"
 }
