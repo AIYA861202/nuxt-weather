@@ -24,7 +24,7 @@ const props = defineProps({
   }
 })
 
-const buildMap = (arr, key) => {
+const buildMap = (arr = [], key, parameterKey = null) => {
   const map = new Map()
 
   for (const item of arr) {
@@ -37,14 +37,24 @@ const buildMap = (arr, key) => {
       })
     }
 
-    map.get(k)[key] = item.parameter?.parameterName ?? item.value
+    const row = map.get(k)
+
+    row[key] = item.parameter?.parameterName ?? item.value
+
+    if (parameterKey) {
+      row[parameterKey] = item.parameter?.parameterValue
+    }
   }
 
   return map
 }
 
 const mergedMap = computed(() => {
-  const wx = buildMap(props.wx?.time ?? [], "wx")
+  const wx = buildMap(
+  props.wx?.time ?? [],
+  "wx",
+  "parameter"
+)
   const pop = buildMap(props.pop?.time ?? [], "pop")
   const mint = buildMap(props.mint?.time ?? [], "minT")
   const maxt = buildMap(props.maxt?.time ?? [], "maxT")
@@ -86,6 +96,7 @@ const blocks = computed(() => {
       title: getBlockLabel(item.startTime),
       range: `${format(start)} ~ ${format(end)}`,
       wx: item.wx,
+      parameter: item.parameter,
       pop: item.pop,
       minT: item.minT,
       maxT: item.maxT,
@@ -95,15 +106,26 @@ const blocks = computed(() => {
 })
 </script>
 <template>
-  <div v-for="b in blocks" :key="b.range" class="mb-6">
+  <div v-for="b in blocks" :key="b.range" class="min-w-full lg:min-w-[800px]">
     <div class="font-semibold text-lg">{{ b.title }}</div>
     <div class="text-sm text-gray-500">{{ b.range }}</div>
 
-    <div class="grid grid-cols-1 gap-2 mt-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-      <div class="border rounded bg-white shadow-md p-2">{{ $t("Wx") }}<div>{{ b.wx }}</div></div>
+    <div class="grid grid-cols-1 gap-2 mt-2 sm:grid-cols-2 md:grid-cols-4">
+      <div class="border rounded bg-white shadow-md p-2 flex flex-col items-center justify-center">
+      <component :is="`wxIcon${b.parameter}`" /><div>{{ b.wx }}</div>
+      </div>
       <div class="border rounded bg-white shadow-md p-2">{{ $t("Pop") }}<div>{{ b.pop }}%</div></div>
-      <div class="border rounded bg-white shadow-md p-2">{{ $t("TR") }}<div>{{ b.minT }}°C ~ {{ b.maxT }}°C</div></div>
+      <div class="border rounded bg-white shadow-md p-2">{{ $t("TR") }}
+        <div>{{ b.minT }}°C ~ {{ b.maxT }}°C</div>
+      </div>
       <div class="border rounded bg-white shadow-md p-2">{{ $t("Cl") }}<div>{{ b.cl }}</div></div>
     </div>
   </div>
 </template>
+
+<style lang="scss" scoped>
+svg {
+  width: 50px;
+  height: 50px;
+}
+</style>

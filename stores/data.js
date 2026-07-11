@@ -68,7 +68,7 @@ export const useWeatherStore = defineStore("data", {
       this.error = null;
       this.cityData = null;
 
-      const minLoadingMs = 2000; // 最小載入時間，避免閃爍
+      const minLoadingMs = 1000; // 最小載入時間，避免閃爍
       const startTime = Date.now();
 
       try {

@@ -23,7 +23,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     WEATHER_API_KEY: process.env.WEATHER_API_KEY,
   },
-  modules: ["@pinia/nuxt", "@nuxtjs/tailwindcss","@nuxtjs/i18n", "nuxt-lodash","dayjs-nuxt"],
+  modules: ["@pinia/nuxt", "@nuxtjs/tailwindcss","@nuxtjs/i18n", "dayjs-nuxt", "@nuxt/icon"],
     // modules config
   i18n: {
     strategy: 'prefix_except_default', // 更換語系網址不變
