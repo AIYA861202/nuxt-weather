@@ -63,11 +63,49 @@ interface Person {
 
 interface Person {
   gender: string;
+  job?: string; // 可選屬性(可沒有job (undefined))，可選屬性得放在比選屬性的後面
 }
 
 // 使用 interface 定義一個物件(interface 可以被擴充(擴充了gender。type 不能擴充))
 const person: Person = {
   name: "John",
   age: 30,
-  gender: "male"
+  gender: "female"
 };
+
+// Functions 函數
+function add(a: number, b: number): number { // (指定參數型別,指定參數型別): 指定回傳型別
+  return a + b;
+}
+
+function add2(a: string, b: string): number { // 報錯，因為回傳型別指定為 number，但實際上回傳的是 string
+  return a + b;
+}
+
+function add3(a: number, b?: number) {
+  if (b !== undefined) { // 檢查 b 是否有傳入值，因為沒傳入值的話 b 會是 undefined，無法計算而報錯
+    return a + b;
+  } else {
+    return a;
+  }
+}
+
+// Unknown 斷言
+async function fetchData(){
+  const res = await fetch('https://jsonplaceholder.typicode.com/todos/1');
+  const data: unknown = await res.json(); // 將回傳的資料型別指定為 unknown，因為我們不確定回傳的資料型別是什麼
+  return data;
+}
+
+// 2.若要指定型別：
+type dataType = {
+  userId: number;
+  id: number;
+  title: string;
+  completed: boolean;
+};
+async function fetchData2(){
+  const res = await fetch('https://jsonplaceholder.typicode.com/todos/1');
+  const data = await res.json() as dataType; // 3. 將回傳的資料型別指定為 dataType
+  return data;
+}

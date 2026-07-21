@@ -77,12 +77,17 @@ const mergedMap = computed(() => {
   }))
 })
 
-const getBlockLabel = (start, now = new Date()) => {
-  const hour = new Date(start).getHours()
+const getBlockLabel = (end) => {
+  const now = new Date()
 
-  if (hour === 6) return "現在至中午"
-  if (hour === 12) return "中午至下午"
-  if (hour === 18) return "晚間至明早"
+  // 計算時間差（毫秒轉為小時）
+  const diffHours = (end - now) / (1000 * 60 * 60)
+
+  if (diffHours <= 12) return "現在"
+  
+  if (diffHours <= 24) return "12小時後"
+  
+  if (diffHours <= 36) return "24小時後"
 
   return "其他"
 }
@@ -93,7 +98,7 @@ const blocks = computed(() => {
     const end = new Date(item.endTime)
 
     return {
-      title: getBlockLabel(item.startTime),
+      title: getBlockLabel(end),
       range: `${format(start)} ~ ${format(end)}`,
       wx: item.wx,
       parameter: item.parameter,
@@ -114,7 +119,9 @@ const blocks = computed(() => {
       <div class="border rounded bg-white shadow-md p-2 flex flex-col items-center justify-center">
       <component :is="`wxIcon${b.parameter}`" /><div>{{ b.wx }}</div>
       </div>
-      <div class="border rounded bg-white shadow-md p-2">{{ $t("Pop") }}<div>{{ b.pop }}%</div></div>
+      <div class="border rounded bg-white shadow-md p-2 pop" :style="`--pop: ${b.pop / 1.7}px;`"><wave/>
+        <div class="absolute z-1">{{ $t("Pop") }} {{ b.pop }}%</div>
+      </div>
       <div class="border rounded bg-white shadow-md p-2">{{ $t("TR") }}
         <div>{{ b.minT }}°C ~ {{ b.maxT }}°C</div>
       </div>
@@ -124,8 +131,29 @@ const blocks = computed(() => {
 </template>
 
 <style lang="scss" scoped>
-svg {
-  width: 50px;
-  height: 50px;
+.pop{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 80px;
+  overflow: hidden;
+  &:after{
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: var(--pop);
+    background-color: color-mix(#6CA3F3 20%, white 80%);
+  }
+  svg{
+    position: absolute;
+    bottom: var(--pop);
+    left: 0;
+    width: 100%;
+    height: auto;
+    margin: -0.5px;
+  }
 }
 </style>
