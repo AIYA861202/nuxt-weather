@@ -153,7 +153,6 @@ const blocks = computed(() => {
     left: 0;
     width: 100%;
     height: auto;
-    margin: -0.5px;
   }
 }
 </style>
