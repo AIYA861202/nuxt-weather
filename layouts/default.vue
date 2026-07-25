@@ -1,5 +1,5 @@
 <script setup>
-import logo from "/public/logo.png";
+import bgImg from "~/assets/image/bg.png";
 import ogImg from "/public/og_IMG.png";
 const store = useWeatherStore();
 const { webInfo } = storeToRefs(store);
@@ -79,6 +79,8 @@ const handleMove = (e) => {
 
 <style lang="scss" scoped>
 .bg {
-  background: linear-gradient(to bottom, #6ca3f3 0%, #addcf3 60%, #ffffff 100%);
+  background-color: linear-gradient(to bottom, #6ca3f3 0%, #addcf3 60%, #ffffff 100%);
+  background-image: url("/assets/image/bg.png");
+  background-repeat: no-repeat;
 }
 </style>
