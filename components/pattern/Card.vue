@@ -109,9 +109,27 @@ const blocks = computed(() => {
     }
   })
 })
+// 卡片 v-Motion
+const getCardMotion = (i) => ({
+  initial: {
+    opacity: 0,
+    y: 20
+  },
+  visibleOnce: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: i * 50,
+      type: 'keyframes',
+      ease: 'easeIn',
+      // type: 'spring', // 彈性
+      // stiffness: 250
+    }
+  }
+})
 </script>
 <template>
-  <div v-for="b in blocks" :key="b.range" class="min-w-full lg:min-w-[800px]">
+  <div v-for="(b,i) in blocks" v-motion="getCardMotion(i)" :key="b.range" class="min-w-full lg:min-w-[800px]">
     <div class="font-semibold text-lg">{{ b.title }}</div>
     <div class="text-sm text-gray-500">{{ b.range }}</div>
 
