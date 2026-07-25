@@ -129,7 +129,7 @@ const getCardMotion = (i) => ({
 })
 </script>
 <template>
-  <div v-for="(b,i) in blocks" v-motion="getCardMotion(i)" :key="b.range" class="min-w-full lg:min-w-[800px]">
+  <div v-for="(b,i) in blocks" v-motion="getCardMotion(i)" :key="b.range" class="w-full lg:min-w-[800px]">
     <div class="font-semibold text-lg">{{ b.title }}</div>
     <div class="text-sm text-gray-500">{{ b.range }}</div>
 

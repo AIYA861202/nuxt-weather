@@ -80,7 +80,9 @@ const handleMove = (e) => {
 <style lang="scss" scoped>
 .bg {
   background-color: linear-gradient(to bottom, #6ca3f3 0%, #addcf3 60%, #ffffff 100%);
-  background-image: url("/assets/image/bg.png");
+  background-image: url("assets/image/bg.png");
+  background-size: cover;
   background-repeat: no-repeat;
+  background-position: center;
 }
 </style>
