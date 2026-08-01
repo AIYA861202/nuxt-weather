@@ -1,5 +1,6 @@
 <script setup>
-const { locale, locales, setLocale, setLocaleCookie, switchLocalePath } =
+const store = useWeatherStore()
+const { locale, locales, setLocale, setLocaleCookie } =
   useI18n();
 const lang = computed(() => {
   return locales.value.find((l) => l.code !== locale.value);
@@ -9,10 +10,9 @@ const setLang = async (newLocale) => {
   if (newLocale === locale.value) return;
 
   try {
+    store.cityData = null;
     await setLocale(newLocale);
     await setLocaleCookie(newLocale);
-    console.log(`Language switched to: ${newLocale}`);
-
     await navigateTo(switchLocalePath(newLocale));
   } catch (error) {
     console.error("Language switch failed:", error);

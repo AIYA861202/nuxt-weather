@@ -1,17 +1,54 @@
 export default defineEventHandler(async (event) => {
-const config = useRuntimeConfig()
-const query = getQuery(event)
-const apiKey = config.WEATHER_API_KEY
-const dataset = query.dataset || 'F-C0032-001'
+  const config = useRuntimeConfig();
+  const query = getQuery(event);
+  const apiKey = config.WEATHER_API_KEY;
+  const dataset = String(query.dataset || "F-C0032-001");
 
-let cities = query.locationName
+  let cities = query.locationName;
 
-  if (!cities) cities = []
-  if (!Array.isArray(cities)) cities = [cities]
+  if (!cities) cities = [];
+  if (!Array.isArray(cities)) cities = [cities];
 
-const url = `https://opendata.cwa.gov.tw/api/v1/rest/datastore/${dataset}?Authorization=${apiKey}&format=JSON&locationName=${cities.map(encodeURIComponent).join(',')}`
+  const cityNames = cities.map(String);
 
-const data: any = await $fetch(url)
- 
-return data
-})
+  // F-C0032-002 只提供 JSON/XML 檔案下載，不支援 REST datastore 查詢
+  if (dataset === "F-C0032-002") {
+    const url = new URL(
+      `https://opendata.cwa.gov.tw/fileapi/v1/opendataapi/${dataset}`,
+    );
+    url.searchParams.set("Authorization", apiKey);
+    url.searchParams.set("format", "JSON");
+
+    const data: any = await $fetch(url.toString(), {
+      responseType: "json",
+    });
+    const locations = data?.cwaopendata?.dataset?.location;
+
+    if (!Array.isArray(locations)) {
+      throw createError({
+        statusCode: 502,
+        statusMessage: "Invalid weather data returned by CWA",
+      });
+    }
+
+    return {
+      success: "true",
+      records: {
+        location: cityNames.length
+          ? locations.filter((location: any) =>
+              cityNames.includes(location.locationName),
+            )
+          : locations,
+      },
+    };
+  }
+
+  const url = new URL(
+    `https://opendata.cwa.gov.tw/api/v1/rest/datastore/${dataset}`,
+  );
+  url.searchParams.set("Authorization", apiKey);
+  url.searchParams.set("format", "JSON");
+  if (cityNames.length) url.searchParams.set("locationName", cityNames.join(","));
+
+  return await $fetch(url.toString());
+});

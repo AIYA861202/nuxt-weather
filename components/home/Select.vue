@@ -1,11 +1,11 @@
 <script setup>
 const { locale } = useI18n();
 const store = useWeatherStore();
-const dataset = "F-C0032-001";
+const dataset = locale.value === "zh-TW" ? "F-C0032-001" : "F-C0032-002";
 
 const selectCity = async (city) => {
   if (!city) return;
-
+console.log(`Selected city: ${city}`);
   await store.fetchWeather(dataset, city);
 };
 </script>
@@ -21,9 +21,9 @@ const selectCity = async (city) => {
     <option
       v-for="c in store.cities"
       :key="locale === 'zh-TW' ? c.name : c.enName"
-      :value="c.name"
+      :value="locale === 'zh-TW' ? c.name : c.enName"
     >
-      {{ locale === "zh-TW" ? c.name : c.enName }}
+      {{ locale === 'zh-TW' ? c.name : c.enName }}
     </option>
   </select>
 </template>

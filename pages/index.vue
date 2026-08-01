@@ -13,7 +13,7 @@ const currCity = computed(() => {
 <template>
   <div class="flex flex-col items-center justify-center gap-4 min-h-[60vh]">
     <HomeSelect />
-    <div v-if="store.loading" class="flex items-center gap-2 m-auto text-white">
+    <div v-if="store.loading" class="flex items-center gap-2 m-auto">
       <loading class="text-8xl" />
       {{ $t("loading") }}
     </div>
