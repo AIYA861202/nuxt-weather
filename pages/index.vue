@@ -1,12 +1,29 @@
 <script setup>
 const { locale } = useI18n()
 const store = useWeatherStore()
+const { searchByPosition } = useSearchByPosition()
 
 const currCity = computed(() => {
   const city = store.cities.find(
     (c) => c.name === store.selectedCity || c.enName === store.selectedCity,
   )
   return city ? (locale.value === "zh-TW" ? city.name : city.enName) : ""
+})
+
+
+
+onMounted(() => {
+  if (!("geolocation" in navigator) || store.selectedCity) return
+
+  navigator.geolocation.getCurrentPosition(
+    searchByPosition,
+    (error) => {
+      if(locale.value === "zh-TW") console.warn("無法從目前位置搜尋天氣資訊，請允許使用位置資訊", error)
+      else
+      console.warn("Please allow location access", error)
+    },
+    { timeout: 10000, maximumAge: 300000 },
+  )
 })
 </script>
 

@@ -5,17 +5,17 @@ const dataset = locale.value === "zh-TW" ? "F-C0032-001" : "F-C0032-002";
 
 const selectCity = async (city) => {
   if (!city) return;
-console.log(`Selected city: ${city}`);
   await store.fetchWeather(dataset, city);
 };
 </script>
 
 <template>
   <select
+    v-model="store.selectedCity"
     class="form-select p-3 shadow-sm"
     @change="selectCity($event.target.value)"
   >
-    <option disabled selected value="" class="rounded-md">
+    <option disabled :value="$t('selectCity')" class="rounded-md">
       {{ $t("selectCity") }}
     </option>
     <option
