@@ -1,7 +1,21 @@
 export default defineEventHandler(async (event) => {
+  applyApiCors(event);
+
+  if (getMethod(event) === "OPTIONS") {
+    setResponseStatus(event, 204);
+    return null;
+  }
+
   const config = useRuntimeConfig();
   const query = getQuery(event);
   const apiKey = config.WEATHER_API_KEY;
+
+  if (!apiKey) {
+    throw createError({
+      statusCode: 500,
+      statusMessage: "WEATHER_API_KEY is not configured",
+    });
+  }
   const dataset = String(query.dataset || "F-C0032-001");
 
   let cities = query.locationName;

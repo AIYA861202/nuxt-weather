@@ -1,4 +1,6 @@
 export default defineEventHandler(async (event) => {
+  applyApiCors(event)
+
   const query = getQuery(event)
   const lat = Number(query.lat)
   const lon = Number(query.lon)

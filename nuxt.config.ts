@@ -24,7 +24,13 @@ export default defineNuxtConfig({
   runtimeConfig: {
     WEATHER_API_KEY: process.env.WEATHER_API_KEY,
     public: {
-    apiBase: process.env.NUXT_PUBLIC_API_BASE,
+      // Keep this empty for the Vercel website (same-origin /api requests).
+      // Set NUXT_PUBLIC_API_BASE to the production Vercel URL when building
+      // the static bundle copied into Capacitor.
+      apiBase:
+        process.env.NUXT_PUBLIC_API_BASE ||
+        process.env.NUXT_PUBLIC_APP_URL ||
+        "",
     },
   },
   modules: ["@pinia/nuxt", "@nuxtjs/tailwindcss","@nuxtjs/i18n", "dayjs-nuxt", "@nuxt/icon", "@vueuse/motion/nuxt"],

@@ -1,5 +1,7 @@
 export const useSearchByPosition = () => {
   const { locale } = useI18n()
+  const config = useRuntimeConfig()
+  const apiBase = config.public.apiBase.replace(/\/$/, "")
   const store = useWeatherStore()
 
 
@@ -22,7 +24,7 @@ export const useSearchByPosition = () => {
 
   const searchByPosition = async (position) => {
     try {
-      const { address } = await $fetch("/api/reverse-geocode", {
+      const { address } = await $fetch(`${apiBase}/api/reverse-geocode`, {
         params: {
           lat: position.coords.latitude, //緯度
           lon: position.coords.longitude, //經度

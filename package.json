@@ -6,6 +6,8 @@
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
+    "cap:build": "nuxt generate && cap sync android",
+    "cap:open": "cap open android",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },

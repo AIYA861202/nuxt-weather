@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Taiwan Weather Inquiry</string>
+    <string name="title_activity_main">Taiwan Weather Inquiry</string>
+    <string name="package_name">com.aiya.nuxtweather</string>
+    <string name="custom_url_scheme">com.aiya.nuxtweather</string>
+</resources>

@@ -63,6 +63,8 @@ export const useWeatherStore = defineStore("data", {
 
   actions: {
     async fetchWeather(set, city) {
+      const config = useRuntimeConfig();
+      const apiBase = config.public.apiBase.replace(/\/$/, "");
       this.selectedCity = city;
       this.loading = true;
       this.error = null;
@@ -72,7 +74,7 @@ export const useWeatherStore = defineStore("data", {
       const startTime = Date.now();
 
       try {
-        const data = await $fetch("/api/weather", {
+        const data = await $fetch(`${apiBase}/api/weather`, {
           params: {
             dataset: set,
             locationName: city,
