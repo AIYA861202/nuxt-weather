@@ -1,6 +1,6 @@
 import type { H3Event } from "h3";
 
-const DEFAULT_ALLOWED_ORIGINS = ["https://localhost", "http://localhost"];
+const DEFAULT_ALLOWED_ORIGINS = ["https://localhost", "http://localhost","https://nuxt-weather-xi.vercel.app/"];
 
 export const applyApiCors = (event: H3Event) => {
   const configuredOrigins = (process.env.CORS_ALLOWED_ORIGINS || "")
