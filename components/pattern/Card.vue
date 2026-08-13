@@ -83,13 +83,13 @@ const getBlockLabel = (end) => {
   // 計算時間差（毫秒轉為小時）
   const diffHours = (end - now) / (1000 * 60 * 60)
 
-  if (diffHours <= 12) return "現在"
+  if (diffHours <= 12) return $t("now")
   
-  if (diffHours <= 24) return "12小時後"
+  if (diffHours <= 24) return $t("after12hr")
   
-  if (diffHours <= 36) return "24小時後"
+  if (diffHours <= 36) return $t("after24hr")
 
-  return "其他"
+  return $t("after48hr")
 }
 
 const blocks = computed(() => {
