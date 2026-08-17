@@ -73,6 +73,8 @@ const handleMove = (e) => {
     <div class="relative z-20">
       <HomeHeader :webInfo="webInfo" />
       <slot />
+      <!-- <AITest /> -->
+      <AIEs />
     </div>
   </div>
 </template>

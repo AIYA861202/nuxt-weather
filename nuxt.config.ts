@@ -1,5 +1,33 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  app: {
+    baseURL: "/", //  加上 repo 名稱（結尾有斜線/nuxt-weather/）
+    head: {
+      htmlAttrs: {
+        lang: 'zh-Hant'
+      },
+      link: [
+        {
+          rel: 'icon',
+          type: 'image/x-icon',
+          href: '/favicon.ico'
+        },
+        {
+          // AI精靈css
+          rel: 'stylesheet',
+          href: 'https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/themes/df-messenger-default.css'
+        }
+      ],
+      script: [
+        {
+          // AI精靈 js
+          // src: 'https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js'
+          src: 'https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1'
+        }
+      ],
+      noscript: [{ children: 'Javascript is required' }]
+    }
+  },
   //  ssr: true, // 開啟 SSR 模式
   css: ["@/assets/styles/main.scss"],
   vite: {
@@ -18,9 +46,6 @@ export default defineNuxtConfig({
   // build: {
   //   transpile: ["naive-ui", "vueuc", "vooks", "evtd"],
   // },
-  app: {
-    baseURL: "/", //  加上 repo 名稱（結尾有斜線/nuxt-weather/）
-  },
   runtimeConfig: {
     WEATHER_API_KEY: process.env.WEATHER_API_KEY,
     public: {
