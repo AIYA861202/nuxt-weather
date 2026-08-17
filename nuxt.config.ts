@@ -21,8 +21,8 @@ export default defineNuxtConfig({
       script: [
         {
           // AI精靈 js
-          // src: 'https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js'
-          src: 'https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1'
+          src: 'https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js'
+          // src: 'https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1'
         }
       ],
       noscript: [{ children: 'Javascript is required' }]

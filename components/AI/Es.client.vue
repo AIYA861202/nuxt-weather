@@ -2,11 +2,26 @@
 
 <template>
   <df-messenger
+  location="global"
+  project-id="zhubei-461803"
+  agent-id="2b832441-e550-494f-8ccd-c14e56406413"
+  language-code="zh-tw"
+  allow-fullscreen="small"
+>
+  <df-messenger-chat-bubble
+    chat-title="AI 天氣助理"
+    allow-fullscreen="small"
+    chat-icon="https://res.cloudinary.com/dmylxasrv/image/upload/v1749460025/chat_gnehgg.png"
+    placeholder-text="請輸入您的問題"
+    bot-writing-text="思考中..."
+  />
+</df-messenger>
+  <!-- <df-messenger
     chat-title="竹北 AI 智能客服"
     agent-id="cf8b2187-07cd-47d2-bd58-af7495a48053"
     language-code="zh-tw"
     chat-icon="https://res.cloudinary.com/dmylxasrv/image/upload/v1749460025/chat_gnehgg.png"
-  ></df-messenger>
+  ></df-messenger> -->
 </template>
 
 <style lang="scss" scoped>
@@ -59,6 +74,9 @@ df-messenger {
   border-radius: 50px;
   --df-messenger-chat-border-radius: 10px;
   --df-messenger-message-internal-border-radius: 0px;
+  @media (max-width: 500px) {
+  position: relative;
+  }
 }
 
 df-messenger-chat-bubble > svg {
